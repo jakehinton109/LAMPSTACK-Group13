@@ -1,0 +1,19 @@
+USE ContactInformation;
+
+INSERT INTO Users (FirstName, LastName, Login, Password)
+VALUES
+('Jake', 'Hinton', 'JHinton', 'DatabaseDev'),
+('Ilteber', 'Dover', 'IDover', 'APIDev'),
+('Matthew', 'Mato', 'MMato', 'FrontendDev'),
+('Jackson', 'Willette', 'JWillette', 'ProjectManager');
+
+INSERT INTO Contacts (FirstName, LastName, Phone, Email, UserID)
+VALUES
+('Baker', 'Mayfield', '4071111111', 'buccaneers@gmail.com', 1),
+('Josh', 'Allen', '4072222222', 'bills@gmail.com', 1),
+('Patrick', 'Mahomes', '4073333333', 'chiefs@gmail.com', 2),
+('Joe', 'Burrow', '4074444444', 'bengals@gmail.com', 2),
+('Jalen', 'Hurts', '4075555555', 'eagles@gmail.com', 3),
+('Justin', 'Herbert', '4076666666', 'chargers@gmail.com', 3),
+('Dak', 'Prescott', '4077777777', 'cowboys@gmail.com', 4),
+('Jared', 'Goff', '4078888888', 'lions@gmail.com', 4);
