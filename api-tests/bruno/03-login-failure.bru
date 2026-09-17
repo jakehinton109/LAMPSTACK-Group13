@@ -1,0 +1,30 @@
+meta {
+  name: Login - Wrong Password
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/login.php
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+}
+
+body:json {
+  {
+    "login": "{{testLogin}}",
+    "password": "definitely-wrong-password"
+  }
+}
+
+tests {
+  test("incorrect password returns 401", function() {
+    expect(res.status).to.equal(401);
+    expect(res.body.error).to.be.a("string");
+  });
+}

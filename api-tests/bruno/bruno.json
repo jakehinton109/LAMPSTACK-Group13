@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "LAMP Group 13 API",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

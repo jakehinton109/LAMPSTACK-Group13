@@ -1,0 +1,32 @@
+meta {
+  name: Register User
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/register.php
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+}
+
+body:json {
+  {
+    "firstName": "Bruno",
+    "lastName": "Tester",
+    "login": "{{testLogin}}",
+    "password": "{{testPassword}}",
+    "teamName": "API Test Team"
+  }
+}
+
+tests {
+  test("registration returns 201", function() {
+    expect(res.status).to.equal(201);
+  });
+}
