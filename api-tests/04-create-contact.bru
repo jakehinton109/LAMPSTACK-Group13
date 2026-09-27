@@ -1,0 +1,44 @@
+meta {
+  name: Create Contact
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/createContact.php
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+}
+
+body:json {
+  {
+    "firstName": "John",
+    "lastName": "Smith",
+    "phone": "555-123-4567",
+    "email": "john.smith@example.com",
+    "position": "QB",
+    "side": "Offense"
+  }
+}
+
+tests {
+  test("contact creation returns 201", function() {
+    expect(res.status).to.equal(201);
+    expect(res.body.contactId).to.be.a("number");
+  });
+
+  test("contact creation returns message", function() {
+    expect(res.body.message).to.equal("Contact created!");
+  });
+}
+
+script:post-response {
+  if (res.body.contactId) {
+    bru.setEnvVar("contactId", res.body.contactId);
+  }
+}

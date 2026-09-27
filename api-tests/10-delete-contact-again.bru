@@ -1,0 +1,25 @@
+meta {
+  name: Delete Contact Again
+  type: http
+  seq: 10
+}
+
+delete {
+  url: {{baseUrl}}/deleteContact.php?id={{contactId}}
+  body: none
+  auth: none
+}
+
+headers {
+  Accept: application/json
+}
+
+tests {
+  test("deleting missing contact returns 404", function() {
+    expect(res.status).to.equal(404);
+  });
+
+  test("error is returned", function() {
+    expect(res.body.error).to.be.a("string");
+  });
+}

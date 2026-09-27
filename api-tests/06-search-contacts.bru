@@ -1,0 +1,29 @@
+meta {
+  name: Search Contacts
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{baseUrl}}/searchContacts.php?q=John
+  body: none
+  auth: none
+}
+
+headers {
+  Accept: application/json
+}
+
+tests {
+  test("search returns 200", function() {
+    expect(res.status).to.equal(200);
+  });
+
+  test("search returns results", function() {
+    expect(res.body.results).to.be.an("array");
+  });
+
+  test("query is returned", function() {
+    expect(res.body.query).to.equal("John");
+  });
+}

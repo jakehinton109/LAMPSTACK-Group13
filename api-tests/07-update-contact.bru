@@ -1,0 +1,37 @@
+meta {
+  name: Update Contact
+  type: http
+  seq: 7
+}
+
+put {
+  url: {{baseUrl}}/updateContact.php?id={{contactId}}
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+}
+
+body:json {
+  {
+    "firstName": "John",
+    "lastName": "Smith",
+    "phone": "555-999-9999",
+    "email": "updated.john@example.com",
+    "position": "WR",
+    "side": "Offense"
+  }
+}
+
+tests {
+  test("contact update returns 200", function() {
+    expect(res.status).to.equal(200);
+  });
+
+  test("contact update returns message", function() {
+    expect(res.body.message).to.equal("Contact updated!");
+  });
+}

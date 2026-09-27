@@ -1,0 +1,31 @@
+meta {
+  name: Search Updated Contact
+  type: http
+  seq: 8
+}
+
+get {
+  url: {{baseUrl}}/searchContacts.php?q=John
+  body: none
+  auth: none
+}
+
+headers {
+  Accept: application/json
+}
+
+tests {
+  test("search returns 200", function() {
+    expect(res.status).to.equal(200);
+  });
+
+  test("updated contact exists", function() {
+    const contact = res.body.results.find(
+      item => item.id == bru.getEnvVar("contactId")
+    );
+
+    expect(contact).to.not.equal(undefined);
+    expect(contact.email).to.equal("updated.john@example.com");
+    expect(contact.phone).to.equal("555-999-9999");
+  });
+}

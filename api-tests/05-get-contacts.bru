@@ -1,0 +1,33 @@
+meta {
+  name: Get Contacts
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{baseUrl}}/getContacts.php?page=1
+  body: none
+  auth: none
+}
+
+headers {
+  Accept: application/json
+}
+
+tests {
+  test("get contacts returns 200", function() {
+    expect(res.status).to.equal(200);
+  });
+
+  test("results is an array", function() {
+    expect(res.body.results).to.be.an("array");
+  });
+
+  test("page is 1", function() {
+    expect(res.body.page).to.equal(1);
+  });
+
+  test("limit is 20", function() {
+    expect(res.body.limit).to.equal(20);
+  });
+}
