@@ -1,0 +1,34 @@
+meta {
+  name: Admin - Suspend User
+  type: http
+  seq: 13
+}
+
+put {
+  url: {{adminUrl}}/suspendUser.php
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+  X-User-ID: {{adminId}}
+}
+
+body:json {
+  {
+    "userId": {{userId}},
+    "disabled": 1
+  }
+}
+
+tests {
+  test("admin suspend user returns 200", function() {
+    expect(res.status).to.equal(200);
+  });
+
+  test("suspend message is returned", function() {
+    expect(res.body.message).to.equal("User account suspended.");
+  });
+}

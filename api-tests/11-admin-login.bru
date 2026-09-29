@@ -1,0 +1,39 @@
+meta {
+  name: Admin Login
+  type: http
+  seq: 11
+}
+
+post {
+  url: {{authUrl}}/login.php
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+}
+
+body:json {
+  {
+    "login": "{{adminLogin}}",
+    "password": "{{adminPassword}}"
+  }
+}
+
+tests {
+  test("admin login returns 200", function() {
+    expect(res.status).to.equal(200);
+  });
+
+  test("logged in user is an admin", function() {
+    expect(res.body.user.role).to.equal("Admin");
+  });
+}
+
+script:post-response {
+  if (res.body.user && res.body.user.id) {
+    bru.setEnvVar("adminId", res.body.user.id);
+  }
+}

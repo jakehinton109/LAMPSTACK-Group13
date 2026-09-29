@@ -1,0 +1,26 @@
+meta {
+  name: Admin - Get Users
+  type: http
+  seq: 12
+}
+
+get {
+  url: {{adminUrl}}/getUsers.php
+  body: none
+  auth: none
+}
+
+headers {
+  Accept: application/json
+  X-User-ID: {{adminId}}
+}
+
+tests {
+  test("admin get users returns 200", function() {
+    expect(res.status).to.equal(200);
+  });
+
+  test("users result is an array", function() {
+    expect(res.body.results).to.be.an("array");
+  });
+}

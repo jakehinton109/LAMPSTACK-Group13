@@ -1,0 +1,33 @@
+meta {
+  name: Suspended User Login
+  type: http
+  seq: 14
+}
+
+post {
+  url: {{authUrl}}/login.php
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+}
+
+body:json {
+  {
+    "login": "{{testLogin}}",
+    "password": "{{testPassword}}"
+  }
+}
+
+tests {
+  test("suspended user login returns 403", function() {
+    expect(res.status).to.equal(403);
+  });
+
+  test("suspended error message is returned", function() {
+    expect(res.body.error).to.equal("This account is suspended.");
+  });
+}
