@@ -5,13 +5,14 @@ meta {
 }
 
 delete {
-  url: {{baseUrl}}/deleteContact.php?id={{contactId}}
+  url: {{manageUrl}}/deleteContact.php?id={{contactId}}
   body: none
   auth: none
 }
 
 headers {
   Accept: application/json
+  X-User-ID: {{userId}}
 }
 
 tests {

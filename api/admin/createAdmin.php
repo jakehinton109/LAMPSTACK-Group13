@@ -1,11 +1,14 @@
 <?php
 
 require_once __DIR__ . "/../config/helpers.php";
+require_once __DIR__ . "/../config/auth.php";
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST")
 {
     sendJson(["error" => "Method not allowed"], 405);
 }
+
+requireAdmin();
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -24,12 +27,11 @@ require_once __DIR__ . "/../config/db.php";
 
 try
 {
-    // Store the hash, never the actual password.
     $hashedPassword = password_hash($data["password"], PASSWORD_DEFAULT);
 
     $statement = $pdo->prepare(
         "INSERT INTO Users (FirstName, LastName, Login, Password, TeamName, Role, Disabled)
-         VALUES (:firstName, :lastName, :login, :password, :teamName, 'User', 0)"
+         VALUES (:firstName, :lastName, :login, :password, :teamName, 'Admin', 0)"
     );
 
     $statement->execute([
@@ -41,7 +43,7 @@ try
     ]);
 
     sendJson([
-        "message" => "User registered successfully",
+        "message" => "Admin account created.",
         "userId" => (int) $pdo->lastInsertId()
     ], 201);
 }
@@ -52,5 +54,6 @@ catch (PDOException $e)
         sendJson(["error" => "Login already exists"], 409);
     }
 
-    sendJson(["error" => "Registration failed"], 500);
+    sendJson(["error" => "Could not create admin account."], 500);
 }
+?>

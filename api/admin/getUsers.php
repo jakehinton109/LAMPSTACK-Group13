@@ -19,7 +19,8 @@ $statement = $pdo->prepare(
         LastName,
         Login,
         TeamName,
-        Role
+        Role,
+        Disabled
     FROM Users
     ORDER BY ID ASC"
 );
@@ -38,7 +39,8 @@ foreach ($users as $user)
         "lastName" => $user["LastName"],
         "login" => $user["Login"],
         "teamName" => $user["TeamName"],
-        "role" => $user["Role"]
+        "role" => $user["Role"],
+        "disabled" => (bool) $user["Disabled"]
     ];
 }
 

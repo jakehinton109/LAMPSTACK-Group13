@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: {{baseUrl}}/createContact.php
+  url: {{manageUrl}}/createContact.php
   body: json
   auth: none
 }
@@ -13,6 +13,7 @@ post {
 headers {
   Content-Type: application/json
   Accept: application/json
+  X-User-ID: {{userId}}
 }
 
 body:json {

@@ -24,11 +24,16 @@ require_once __DIR__ . "/../config/db.php";
 
 // Find the user by their login name.
 $statement = $pdo->prepare(
-    "SELECT ID, FirstName, LastName, Login, Password, TeamName
+    "SELECT ID, FirstName, LastName, Login, Password, TeamName, Role, Disabled
      FROM Users WHERE Login = :login"
 );
 $statement->execute([":login" => trim($data["login"])]);
 $user = $statement->fetch();
+
+if ($user && (int) $user["Disabled"] === 1)
+{
+    sendJson(["error" => "This account is suspended."], 403);
+}
 
 // Check the password against the saved hash.
 if (!$user || !password_verify($data["password"], $user["Password"]))
@@ -43,6 +48,8 @@ sendJson([
         "firstName" => $user["FirstName"],
         "lastName" => $user["LastName"],
         "login" => $user["Login"],
-        "teamName" => $user["TeamName"]
+        "teamName" => $user["TeamName"],
+        "role" => $user["Role"],
+        "disabled" => (bool) $user["Disabled"]
     ]
 ], 200);

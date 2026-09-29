@@ -5,13 +5,14 @@ meta {
 }
 
 get {
-  url: {{baseUrl}}/searchContacts.php?q=John
+  url: {{searchUrl}}/searchContacts.php?q=John
   body: none
   auth: none
 }
 
 headers {
   Accept: application/json
+  X-User-ID: {{userId}}
 }
 
 tests {

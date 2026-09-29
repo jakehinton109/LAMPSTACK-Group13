@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: {{baseUrl}}/login.php
+  url: {{authUrl}}/login.php
   body: json
   auth: none
 }
@@ -27,4 +27,10 @@ tests {
     expect(res.status).to.equal(200);
     expect(res.body.user.login).to.equal(bru.getEnvVar("testLogin"));
   });
+}
+
+script:post-response {
+  if (res.body.user && res.body.user.id) {
+    bru.setEnvVar("userId", res.body.user.id);
+  }
 }
