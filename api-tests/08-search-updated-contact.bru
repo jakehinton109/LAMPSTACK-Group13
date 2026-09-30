@@ -5,7 +5,7 @@ meta {
 }
 
 get {
-  url: {{searchUrl}}/searchContacts.php?q=John
+  url: {{searchUrl}}/searchContacts.php?q=Updated%20API%20Test%20Team
   body: none
   auth: none
 }
@@ -28,5 +28,6 @@ tests {
     expect(contact).to.not.equal(undefined);
     expect(contact.email).to.equal("updated.john@example.com");
     expect(contact.phone).to.equal("555-999-9999");
+    expect(contact.teamName).to.equal("Updated API Test Team");
   });
 }

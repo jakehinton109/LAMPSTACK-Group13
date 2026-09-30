@@ -35,7 +35,7 @@ if ($user["role"] === "Admin")
             Contacts.Email,
             Contacts.Position,
             Contacts.Side,
-            Users.TeamName
+            COALESCE(Contacts.TeamName, Users.TeamName) AS TeamName
         FROM Contacts
         INNER JOIN Users
             ON Contacts.UserID = Users.ID
@@ -43,9 +43,11 @@ if ($user["role"] === "Admin")
             (
                 Contacts.FirstName LIKE :starts
                 OR Contacts.LastName LIKE :starts
+                OR Contacts.TeamName LIKE :starts
                 OR Users.TeamName LIKE :starts
                 OR Contacts.FirstName LIKE :contains
                 OR Contacts.LastName LIKE :contains
+                OR Contacts.TeamName LIKE :contains
                 OR Users.TeamName LIKE :contains
             )
         LIMIT 100
@@ -62,7 +64,7 @@ else
             Contacts.Email,
             Contacts.Position,
             Contacts.Side,
-            Users.TeamName
+            COALESCE(Contacts.TeamName, Users.TeamName) AS TeamName
         FROM Contacts
         INNER JOIN Users
             ON Contacts.UserID = Users.ID
@@ -70,9 +72,11 @@ else
             (
                 Contacts.FirstName LIKE :starts
                 OR Contacts.LastName LIKE :starts
+                OR Contacts.TeamName LIKE :starts
                 OR Users.TeamName LIKE :starts
                 OR Contacts.FirstName LIKE :contains
                 OR Contacts.LastName LIKE :contains
+                OR Contacts.TeamName LIKE :contains
                 OR Users.TeamName LIKE :contains
             )
             AND Contacts.UserID = :userId

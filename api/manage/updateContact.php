@@ -44,6 +44,7 @@ if ($user["role"] === "Admin")
             LastName = :lastName,
             Phone = :phone,
             Email = :email,
+            TeamName = :teamName,
             Position = :position,
             Side = :side
         WHERE ID = :id"
@@ -58,6 +59,9 @@ if ($user["role"] === "Admin")
         ":email" => empty($data["email"])
             ? null
             : trim($data["email"]),
+        ":teamName" => empty($data["teamName"])
+            ? null
+            : trim($data["teamName"]),
         ":position" => empty($data["position"])
             ? null
             : trim($data["position"]),
@@ -76,6 +80,7 @@ else
             LastName = :lastName,
             Phone = :phone,
             Email = :email,
+            TeamName = :teamName,
             Position = :position,
             Side = :side
         WHERE ID = :id
@@ -91,6 +96,9 @@ else
         ":email" => empty($data["email"])
             ? null
             : trim($data["email"]),
+        ":teamName" => empty($data["teamName"])
+            ? null
+            : trim($data["teamName"]),
         ":position" => empty($data["position"])
             ? null
             : trim($data["position"]),

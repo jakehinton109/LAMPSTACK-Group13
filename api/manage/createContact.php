@@ -34,6 +34,7 @@ $statement = $pdo->prepare(
         LastName,
         Phone,
         Email,
+        TeamName,
         Position,
         Side
     )
@@ -44,6 +45,7 @@ $statement = $pdo->prepare(
         :lastName,
         :phone,
         :email,
+        :teamName,
         :position,
         :side
     )"
@@ -59,6 +61,9 @@ $statement->execute([
     ":email" => empty($data["email"])
         ? null
         : trim($data["email"]),
+    ":teamName" => empty($data["teamName"])
+        ? null
+        : trim($data["teamName"]),
     ":position" => empty($data["position"])
         ? null
         : trim($data["position"]),

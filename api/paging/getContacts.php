@@ -49,7 +49,7 @@ if ($user["role"] === "Admin")
             Contacts.Position,
             Contacts.Side,
             Contacts.UserID,
-            Users.TeamName
+            COALESCE(Contacts.TeamName, Users.TeamName) AS TeamName
          FROM Contacts
          INNER JOIN Users
             ON Contacts.UserID = Users.ID
@@ -77,7 +77,7 @@ else
             Contacts.Position,
             Contacts.Side,
             Contacts.UserID,
-            Users.TeamName
+            COALESCE(Contacts.TeamName, Users.TeamName) AS TeamName
          FROM Contacts
          INNER JOIN Users
             ON Contacts.UserID = Users.ID
