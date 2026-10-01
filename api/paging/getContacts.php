@@ -31,16 +31,67 @@ if ($limit < 1 || $limit > 100)
 }
 
 $offset = ($page - 1) * $limit;
+$positions = getListParameter("positions");
+$sides = getListParameter("sides");
 
-if ($user["role"] === "Admin")
+$where = [];
+$parameters = [];
+
+if ($user["role"] !== "Admin")
 {
-    $countStatement = $pdo->prepare(
-        "SELECT COUNT(*) AS Total
-         FROM Contacts"
-    );
+    $where[] = "Contacts.UserID = :userId";
+    $parameters[":userId"] = $user["id"];
+}
 
-    $statement = $pdo->prepare(
-        "SELECT
+if (count($positions) > 0)
+{
+    $placeholders = [];
+
+    foreach ($positions as $index => $position)
+    {
+        $name = ":position" . $index;
+        $placeholders[] = $name;
+        $parameters[$name] = $position;
+    }
+
+    $where[] = "Contacts.Position IN (" . implode(", ", $placeholders) . ")";
+}
+
+if (count($sides) > 0)
+{
+    $placeholders = [];
+
+    foreach ($sides as $index => $side)
+    {
+        $name = ":side" . $index;
+        $placeholders[] = $name;
+        $parameters[$name] = $side;
+    }
+
+    $where[] = "Contacts.Side IN (" . implode(", ", $placeholders) . ")";
+}
+
+$whereSql = "";
+
+if (count($where) > 0)
+{
+    $whereSql = "WHERE " . implode(
+        "
+            AND ",
+        $where
+    );
+}
+
+$countStatement = $pdo->prepare(
+    "SELECT COUNT(*) AS Total
+         FROM Contacts
+         INNER JOIN Users
+            ON Contacts.UserID = Users.ID
+         $whereSql"
+);
+
+$statement = $pdo->prepare(
+    "SELECT
             Contacts.ID,
             Contacts.FirstName,
             Contacts.LastName,
@@ -53,46 +104,18 @@ if ($user["role"] === "Admin")
          FROM Contacts
          INNER JOIN Users
             ON Contacts.UserID = Users.ID
+         $whereSql
          ORDER BY Contacts.ID ASC
          LIMIT :limit OFFSET :offset"
-    );
+);
 
-    $countStatement->execute();
-}
-else
+foreach ($parameters as $name => $value)
 {
-    $countStatement = $pdo->prepare(
-        "SELECT COUNT(*) AS Total
-         FROM Contacts
-         WHERE UserID = :userId"
-    );
-
-    $statement = $pdo->prepare(
-        "SELECT
-            Contacts.ID,
-            Contacts.FirstName,
-            Contacts.LastName,
-            Contacts.Phone,
-            Contacts.Email,
-            Contacts.Position,
-            Contacts.Side,
-            Contacts.UserID,
-            COALESCE(Contacts.TeamName, Users.TeamName) AS TeamName
-         FROM Contacts
-         INNER JOIN Users
-            ON Contacts.UserID = Users.ID
-         WHERE Contacts.UserID = :userId
-         ORDER BY Contacts.ID ASC
-         LIMIT :limit OFFSET :offset"
-    );
-
-    $countStatement->execute([
-        ":userId" => $user["id"]
-    ]);
-
-    $statement->bindValue(":userId", $user["id"], PDO::PARAM_INT);
+    $countStatement->bindValue($name, $value);
+    $statement->bindValue($name, $value);
 }
 
+$countStatement->execute();
 $statement->bindValue(":limit", $limit, PDO::PARAM_INT);
 $statement->bindValue(":offset", $offset, PDO::PARAM_INT);
 $statement->execute();
@@ -122,6 +145,39 @@ sendJson([
     "limit" => $limit,
     "total" => (int) $count["Total"],
     "count" => count($results),
+    "filters" => [
+        "positions" => $positions,
+        "sides" => $sides
+    ],
     "results" => $results
 ]);
+
+function getListParameter($name)
+{
+    if (!isset($_GET[$name]))
+    {
+        return [];
+    }
+
+    $value = $_GET[$name];
+
+    if (!is_array($value))
+    {
+        $value = explode(",", $value);
+    }
+
+    $items = [];
+
+    foreach ($value as $item)
+    {
+        $item = trim($item);
+
+        if ($item !== "")
+        {
+            $items[] = $item;
+        }
+    }
+
+    return array_values(array_unique($items));
+}
 ?>

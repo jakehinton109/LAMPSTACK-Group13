@@ -1,0 +1,35 @@
+meta {
+  name: Search Contacts By Position
+  type: http
+  seq: 8
+}
+
+get {
+  url: {{searchUrl}}/searchContacts.php?q=QB
+  body: none
+  auth: none
+}
+
+headers {
+  Accept: application/json
+  X-User-ID: {{userId}}
+}
+
+tests {
+  test("position search returns 200", function() {
+    expect(res.status).to.equal(200);
+  });
+
+  test("created contact is found by position", function() {
+    const contact = res.body.results.find(
+      item => item.id == bru.getEnvVar("contactId")
+    );
+
+    expect(contact).to.not.equal(undefined);
+    expect(contact.position).to.equal("QB");
+  });
+
+  test("query is returned", function() {
+    expect(res.body.query).to.equal("QB");
+  });
+}

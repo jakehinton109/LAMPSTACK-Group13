@@ -43,10 +43,14 @@ if ($user["role"] === "Admin")
             (
                 Contacts.FirstName LIKE :starts
                 OR Contacts.LastName LIKE :starts
+                OR Contacts.Position LIKE :starts
+                OR Contacts.Side LIKE :starts
                 OR Contacts.TeamName LIKE :starts
                 OR Users.TeamName LIKE :starts
                 OR Contacts.FirstName LIKE :contains
                 OR Contacts.LastName LIKE :contains
+                OR Contacts.Position LIKE :contains
+                OR Contacts.Side LIKE :contains
                 OR Contacts.TeamName LIKE :contains
                 OR Users.TeamName LIKE :contains
             )
@@ -72,10 +76,14 @@ else
             (
                 Contacts.FirstName LIKE :starts
                 OR Contacts.LastName LIKE :starts
+                OR Contacts.Position LIKE :starts
+                OR Contacts.Side LIKE :starts
                 OR Contacts.TeamName LIKE :starts
                 OR Users.TeamName LIKE :starts
                 OR Contacts.FirstName LIKE :contains
                 OR Contacts.LastName LIKE :contains
+                OR Contacts.Position LIKE :contains
+                OR Contacts.Side LIKE :contains
                 OR Contacts.TeamName LIKE :contains
                 OR Users.TeamName LIKE :contains
             )
@@ -112,12 +120,16 @@ foreach ($contacts as $contact)
     $lastName = strtolower($contact["LastName"] ?? "");
     $fullName = trim($firstName . " " . $lastName);
     $teamName = strtolower($contact["TeamName"] ?? "");
+    $position = strtolower($contact["Position"] ?? "");
+    $side = strtolower($contact["Side"] ?? "");
 
     $score = max(
         calculateSimilarity($searchLower, $firstName),
         calculateSimilarity($searchLower, $lastName),
         calculateSimilarity($searchLower, $fullName),
-        calculateSimilarity($searchLower, $teamName)
+        calculateSimilarity($searchLower, $teamName),
+        calculateSimilarity($searchLower, $position),
+        calculateSimilarity($searchLower, $side)
     );
 
     if ($score >= 40)
