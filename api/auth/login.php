@@ -32,7 +32,7 @@ $user = $statement->fetch();
 
 if ($user && (int) $user["Disabled"] === 1)
 {
-    sendJson(["error" => "This account is suspended."], 403);
+    sendJson(["error" => "User is suspended."], 403);
 }
 
 // Check the password against the saved hash.

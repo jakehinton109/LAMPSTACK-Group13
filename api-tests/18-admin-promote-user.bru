@@ -1,0 +1,33 @@
+meta {
+  name: Admin - Promote User
+  type: http
+  seq: 19
+}
+
+put {
+  url: {{adminUrl}}/promoteUser.php
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+  X-User-ID: {{adminId}}
+}
+
+body:json {
+  {
+    "userId": {{userId}}
+  }
+}
+
+tests {
+  test("admin promote user returns 200", function() {
+    expect(res.status).to.equal(200);
+  });
+
+  test("promote message is returned", function() {
+    expect(res.body.message).to.equal("User promoted to admin.");
+  });
+}
