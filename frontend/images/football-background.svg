@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a1a35"/>
+      <stop offset="0.55" stop-color="#103463"/>
+      <stop offset="1" stop-color="#1b4f8f"/>
+    </linearGradient>
+
+    <radialGradient id="vignette" cx="0.5" cy="0.5" r="0.75">
+      <stop offset="0.5" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.35"/>
+    </radialGradient>
+
+    <!-- Outlined football with laces -->
+    <symbol id="ball" viewBox="-70 -40 140 80" overflow="visible">
+      <path d="M-62,0 Q0,-48 62,0 Q0,48 -62,0 Z" fill="none" stroke="#fff" stroke-width="3"/>
+      <path d="M-40,-14 Q-34,0 -40,14 M40,-14 Q34,0 40,14" fill="none" stroke="#fff" stroke-width="2.5"/>
+      <line x1="-20" y1="0" x2="20" y2="0" stroke="#fff" stroke-width="3"/>
+      <g stroke="#fff" stroke-width="3">
+        <line x1="-14" y1="-8" x2="-14" y2="8"/>
+        <line x1="-5" y1="-8" x2="-5" y2="8"/>
+        <line x1="5" y1="-8" x2="5" y2="8"/>
+        <line x1="14" y1="-8" x2="14" y2="8"/>
+      </g>
+    </symbol>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+
+  <!-- Yard lines -->
+  <g stroke="#fff" stroke-opacity="0.07" stroke-width="3">
+    <line x1="120" y1="0" x2="120" y2="1080"/>
+    <line x1="360" y1="0" x2="360" y2="1080"/>
+    <line x1="600" y1="0" x2="600" y2="1080"/>
+    <line x1="840" y1="0" x2="840" y2="1080"/>
+    <line x1="1080" y1="0" x2="1080" y2="1080"/>
+    <line x1="1320" y1="0" x2="1320" y2="1080"/>
+    <line x1="1560" y1="0" x2="1560" y2="1080"/>
+    <line x1="1800" y1="0" x2="1800" y2="1080"/>
+  </g>
+
+  <!-- Minor 5-yard lines -->
+  <g stroke="#fff" stroke-opacity="0.035" stroke-width="2">
+    <line x1="240" y1="0" x2="240" y2="1080"/>
+    <line x1="480" y1="0" x2="480" y2="1080"/>
+    <line x1="720" y1="0" x2="720" y2="1080"/>
+    <line x1="960" y1="0" x2="960" y2="1080"/>
+    <line x1="1200" y1="0" x2="1200" y2="1080"/>
+    <line x1="1440" y1="0" x2="1440" y2="1080"/>
+    <line x1="1680" y1="0" x2="1680" y2="1080"/>
+  </g>
+
+  <!-- Hash marks (top and bottom) -->
+  <g stroke="#fff" stroke-opacity="0.06" stroke-width="3">
+    <path d="M0,380 H1920 M0,700 H1920" stroke-dasharray="4 44" stroke-width="22"/>
+  </g>
+
+  <!-- Faint footballs -->
+  <g fill="none" opacity="0.07">
+    <use href="#ball" x="240" y="170" width="190" height="108" transform="rotate(-24 335 224)"/>
+    <use href="#ball" x="1380" y="120" width="150" height="86" transform="rotate(18 1455 163)"/>
+    <use href="#ball" x="820" y="810" width="220" height="125" transform="rotate(-12 930 872)"/>
+    <use href="#ball" x="1560" y="760" width="170" height="97" transform="rotate(32 1645 808)"/>
+    <use href="#ball" x="90" y="800" width="140" height="80" transform="rotate(14 160 840)"/>
+  </g>
+
+  <rect width="1920" height="1080" fill="url(#vignette)"/>
+</svg>
