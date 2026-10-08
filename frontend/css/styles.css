@@ -60,7 +60,7 @@
 
 body {
     font-family: var(--app-font);
-    background: url("../football-background.svg") center / cover no-repeat fixed;;
+    background: url("../images/football-background.svg") center / cover no-repeat fixed;;
     background-color: #0a1a35;
     color: var(--text-primary);
     min-height: 100vh;
