@@ -334,7 +334,7 @@ function displayResults(results, positions, sides) {
             <td>${row.position}</td>
             <td>${row.side}</td>
             <td>${row.teamName}</td>
-            ${isAdmin ? `<td>${loginCache[row.userId]}</td>` : "<td></td>"}
+            ${isAdmin ? `<td>${loginCache[row.userId]}</td>` : ""}
             <td type="hidden" id="contactID"></td>
             <td class="text-end">
                 <button type="button" class="btn btn-outline-primary btn-sm" onclick="modifyContact(${row.id},this)">Modify</button>
