@@ -322,7 +322,7 @@
                         <div id="contactResult" class="small mb-2"></div>
                 <form id="searchForm"class="d-flex" role="search" autocomplete="off" onsubmit="event.preventDefault(); doSearch();" onkeyup="document.getElementById('searchBar').value.trim() === '' ? getContacts(1) : doSearch()"">
                     <input id="searchBar" class="form-control me-2" type="search" placeholder="Search for Players or Teams" aria-label="Search" required/>
-                    <button class="btn btn-outline-success me-2" type="submit">Search</button>
+                    <button class="btn btn-success app-search-btn me-2" type="submit">Search</button>
                     <button class="btn btn-outline-danger me-2" type="reset" onclick="getContacts(1)">Reset</button>
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle me-2 h-100" data-bs-auto-close="outside" type="button" data-bs-toggle="dropdown" aria-expanded="false">

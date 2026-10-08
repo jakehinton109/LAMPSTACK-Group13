@@ -337,7 +337,7 @@ function displayResults(results, positions, sides) {
             ${isAdmin ? `<td>${loginCache[row.userId]}</td>` : ""}
             <td type="hidden" id="contactID"></td>
             <td class="text-end">
-                <button type="button" class="btn btn-outline-primary btn-sm" onclick="modifyContact(${row.id},this)">Modify</button>
+                <button type="button" class="btn btn-primary btn-sm app-modify-btn" onclick="modifyContact(${row.id},this)">Modify</button>
             </td>
                 `;
 
@@ -681,7 +681,7 @@ function displayUsers(results) {
                 title="${row.disabled ? 'Disabled' : 'Enabled'}"></i>
             </td>
             <td class="text-end">
-                <button type="button" class="btn btn-outline-primary btn-sm" onclick="modifyUser(${row.id}, ${row.disabled}, '${row.role}')">Modify</button>
+                <button type="button" class="btn btn-primary btn-sm app-modify-btn" onclick="modifyUser(${row.id}, ${row.disabled}, '${row.role}')">Modify</button>
             </td>
                 `;
 

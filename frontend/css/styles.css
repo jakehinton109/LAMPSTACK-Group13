@@ -189,6 +189,38 @@ body {
     
 }
 
+.app-modify-btn {
+    background: var(--primary-gradient) !important;
+    border: 1px solid var(--color-primary) !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(55, 48, 163, 0.35);
+}
+
+.app-modify-btn:hover,
+.app-modify-btn:focus-visible {
+    background: transparent !important;
+    border-color: var(--color-primary) !important;
+    color: #c7d2fe !important;
+    transform: none;
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.28);
+}
+
+.app-search-btn {
+    background: var(--success-gradient) !important;
+    border: 1px solid var(--color-success) !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(5, 150, 105, 0.3);
+}
+
+.app-search-btn:hover,
+.app-search-btn:focus-visible {
+    background: transparent !important;
+    border-color: var(--color-success) !important;
+    color: #86efac !important;
+    transform: none;
+    box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.25);
+}
+
 .btn-secondary {
     border: none;
     margin-top: 0px;
