@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COP 4331 LAMP Stack Demo</title>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -214,7 +215,7 @@
                     <div class="card-body p-0">
                         
                         <form id="addContactForm" onsubmit="event.preventDefault(); addContact();" class="needs-validation">
-                            <h4>Add Contact</h4>
+                            <h3 class="h4">Add Contact</h3>
 
                             <!-- Row 1: First Name / Last Name -->
                             <div class="row">
@@ -503,11 +504,11 @@
                         </tbody>
                     </table>
                     <div id="pagination" class="d-flex justify-content-end align-items-center gap-3 mt-3">
-                    <button type="button" id="prevPage" class="btn btn-outline-primary btn-sm" onclick="changePage(-1)">
+                    <button type="button" id="prevPage" class="btn btn-outline-primary btn-sm" onclick="changePage(-1)" aria-label="Previous page">
                         <i class="bi bi-chevron-left"></i>
                     </button>
                     <span id="pageNumber" class="fw-semibold">1</span>
-                    <button type="button" id="nextPage" class="btn btn-outline-primary btn-sm" onclick="changePage(1)">
+                    <button type="button" id="nextPage" class="btn btn-outline-primary btn-sm" onclick="changePage(1)" aria-label="Next page">
                         <i class="bi bi-chevron-right"></i>
                     </button>
                     </div>
